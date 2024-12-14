@@ -20,4 +20,9 @@ export class PicSnap {
     setLocation(location: string): void {
         this.location = location;
     }
+
+    withLocation(location: string): PicSnap {
+        this.setLocation(location);
+        return this;
+    }
 }
