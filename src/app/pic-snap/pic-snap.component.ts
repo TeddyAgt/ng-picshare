@@ -1,4 +1,5 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
+import { PicSnap } from "../models/pic-snap.model";
 
 @Component({
     selector: "app-pic-snap",
@@ -7,18 +8,38 @@ import { Component, OnInit } from "@angular/core";
     styleUrl: "./pic-snap.component.scss",
 })
 export class PicSnapComponent implements OnInit {
+    @Input() picSnap!: PicSnap;
+
     title!: string;
     imageUrl!: string;
     description!: string;
     createdAt!: Date;
     likes!: number;
+    hasLiked!: boolean;
+    likeButtonText!: string;
 
     ngOnInit(): void {
-        this.title = "Mon premier snap";
-        this.imageUrl =
-            "https://cdn.pixabay.com/photo/2014/11/30/14/11/cat-551554_1280.jpg";
-        this.description = "blablabla";
-        this.createdAt = new Date();
-        this.likes = 0;
+        this.hasLiked = false;
+        this.likeButtonText = "Liker !";
+    }
+
+    onLike(): void {
+        if (this.hasLiked) {
+            this.unlike();
+        } else {
+            this.like();
+        }
+    }
+
+    like(): void {
+        this.picSnap.addLike();
+        this.likeButtonText = "Retirer mon like !";
+        this.hasLiked = !this.hasLiked;
+    }
+
+    unlike(): void {
+        this.picSnap.removeLike();
+        this.likeButtonText = "Liker !";
+        this.hasLiked = !this.hasLiked;
     }
 }
