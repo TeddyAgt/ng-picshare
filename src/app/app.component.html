@@ -1,3 +1,3 @@
-<app-pic-snap [picSnap]="mySnap"></app-pic-snap>
-<app-pic-snap [picSnap]="myOtherSnap"></app-pic-snap>
-<app-pic-snap [picSnap]="myLastSnap"></app-pic-snap>
+@for (picsnap of picSnaps; track picsnap.title) {
+<app-pic-snap [picSnap]="picsnap"></app-pic-snap>
+}

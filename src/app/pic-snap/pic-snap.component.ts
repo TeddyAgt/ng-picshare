@@ -1,9 +1,10 @@
+import { DatePipe, NgClass, NgStyle, TitleCasePipe } from "@angular/common";
 import { Component, Input, OnInit } from "@angular/core";
 import { PicSnap } from "../models/pic-snap.model";
 
 @Component({
     selector: "app-pic-snap",
-    imports: [],
+    imports: [NgStyle, NgClass, TitleCasePipe, DatePipe],
     templateUrl: "./pic-snap.component.html",
     styleUrl: "./pic-snap.component.scss",
 })

@@ -1,10 +1,13 @@
-<article class="pic-snap-card">
-    <h2>{{picSnap.title}}</h2>
+<article class="pic-snap-card" [ngClass]="{liked: hasLiked}">
+    <h2>{{picSnap.title | titlecase }}</h2>
     <img [src]="picSnap.imageUrl" [alt]="title">
     <p>{{picSnap.description}}</p>
-    <p>PicSnap créé le {{picSnap.createdAt}}</p>
+    <p>PicSnap créé le {{picSnap.createdAt | date:"d MMMM YYYY"}}</p>
+    @if (picSnap.location) {
+    <p>Localisation: {{picSnap.location}}</p>
+    }
     <div class="likes-container">
         <button type="button" (click)="onLike()">{{likeButtonText}}</button>
-        <p>❤️ {{picSnap.likes}}</p>
+        <p>❤️ <span [ngStyle]="{color: 'rgb(0, '+ picSnap.likes +', 0)'}">{{picSnap.likes}}</span></p>
     </div>
 </article>
