@@ -1,4 +1,5 @@
 import { Injectable, OnInit } from "@angular/core";
+import { LikeType } from "../models/like-type.type";
 import { PicSnap } from "../models/pic-snap.model";
 
 @Injectable({
@@ -31,5 +32,16 @@ export class PicSnapsService {
 
     getPicSnaps(): PicSnap[] {
         return [...this.picSnaps];
+    }
+
+    likePicSnap(id: string, likeType: LikeType = "like"): void {
+        const picSnap: PicSnap | undefined = this.picSnaps.find(
+            (e) => e.id === id
+        );
+
+        if (!picSnap) {
+            throw new Error("Aucun PicSnap n'a été trouvé");
+        }
+        picSnap.like(likeType);
     }
 }

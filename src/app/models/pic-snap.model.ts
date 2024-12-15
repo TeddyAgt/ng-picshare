@@ -1,4 +1,7 @@
+import { LikeType } from "./like-type.type";
+
 export class PicSnap {
+    id!: string;
     location?: string;
 
     constructor(
@@ -7,7 +10,9 @@ export class PicSnap {
         public description: string,
         public createdAt: Date,
         public likes: number
-    ) {}
+    ) {
+        this.id = crypto.randomUUID().substring(0, 8);
+    }
 
     addLike(): void {
         this.likes++;
@@ -15,6 +20,14 @@ export class PicSnap {
 
     removeLike(): void {
         this.likes--;
+    }
+
+    like(likeType: LikeType = "like"): void {
+        if (likeType === "like") {
+            this.addLike();
+        } else {
+            this.removeLike();
+        }
     }
 
     setLocation(location: string): void {

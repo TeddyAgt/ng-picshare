@@ -1,6 +1,7 @@
 import { DatePipe, NgClass, NgStyle, TitleCasePipe } from "@angular/common";
 import { Component, Input, OnInit } from "@angular/core";
 import { PicSnap } from "../models/pic-snap.model";
+import { PicSnapsService } from "../services/pic-snaps.service";
 
 @Component({
     selector: "app-pic-snap",
@@ -19,6 +20,8 @@ export class PicSnapComponent implements OnInit {
     hasLiked!: boolean;
     likeButtonText!: string;
 
+    constructor(private PicSnapsService: PicSnapsService) {}
+
     ngOnInit(): void {
         this.hasLiked = false;
         this.likeButtonText = "Liker !";
@@ -33,13 +36,13 @@ export class PicSnapComponent implements OnInit {
     }
 
     like(): void {
-        this.picSnap.addLike();
+        this.PicSnapsService.likePicSnap(this.picSnap.id, "like");
         this.likeButtonText = "Retirer mon like !";
         this.hasLiked = !this.hasLiked;
     }
 
     unlike(): void {
-        this.picSnap.removeLike();
+        this.PicSnapsService.likePicSnap(this.picSnap.id, "unlike;");
         this.likeButtonText = "Liker !";
         this.hasLiked = !this.hasLiked;
     }
